@@ -1,0 +1,61 @@
+﻿building_id,building_name,city,postal_code,unit_id,unit_number,tenant_id,tenant_name,tenant_email,lease_id,lease_start,lease_end,area_sqm,monthly_rent_eur,occupancy_status
+B001,Alexanderhof,Berlin,10115,U001,101,T001,Anna Fischer,anna.fischer1@example.com,L001,03.01.2026,03/01/2027,49,923,Occupied
+B002,Riverside Plaza,Berlin,10963,U002,102,T002,Lukas Wagner,lukas.wagner2@example.com,L002,05/02/2025,05 Feb 2026,56,996,Occupied
+B003,Spree Offices,Berlin,10243,U003,103,T003,Mia Schulz,mia.schulz3@example.com,L003,07 Mar 2026,2027-03-07,63,1069,Occupied
+B004,Hanseatic Business Centre, berlin ,20095,U004,104,T004,Noah Müller,noah.mueller4@example.com,L004,2025-04-09,09.04.2026,70,1142,Occupied
+B005,Elbe View House,Hamburg,20457,U005,105,T005,Lea Fischer,lea.fischer5@example.com,L005,11.05.2026,11/05/2027,77,1215,Occupied
+B006,Isar Park,Munich,80331,U006,106,T006,Paul Wagner,paul.wagner6@example.com,L006,13/06/2025,13 Jun 2026,84,1288,Occupied
+B007,RIVERSIDE PLAZA,Munich,80807,U007,107,T007,Sophie Schulz,sophie.schulz7@example.com,L007,15 Jul 2026,2027-07-15,91,1361,Occupied
+B008,Main Tower Annex,Frankfurt,60311,U008,108,T008,Leon Müller,leon.mueller8@example.com,L008,2025-08-17,17.08.2026,98,1434,Occupied
+B009, Spree Offices ,Frankfurt,60325,U009,109,T009,Emma Fischer,emma.fischer9@example.com,L009,19.09.2026,19/09/2027,105,1507,Occupied
+B010,Kreuzberg Works,Berlin,10997,U010,110,T010,Ben Wagner,maria.schmidt@example,L010,21/10/2025,21 Oct 2026,112,1580,Occupied
+B011,Alster Gate,Hamburg,20148,U011,201,T011,Marie Schulz,marie.schulz11@example.com,L011,23 Nov 2026,2027-11-23,119,1653,Occupied
+B012,Leopold Quarter,Munich,80802,U012,202,T012,Elias Müller,elias.mueller12@example.com,L012,2025-12-25,25.12.2026,43,1726,Occupied
+,Alexanderhof,Berlin,10115,U013,203,T013,Clara Fischer,clara.fischer13@example.com,L013,02.01.2026,02/01/2027,50,1799,Occupied
+B002,Riverside Plaza,Berlin,10963,U014,204,T014,Jonas Wagner,jonas.wagner14@example.com,L014,04/02/2025,04 Feb 2026,57,1872,Occupied
+B003,Spree Offices,hamburg,10243,U015,205,T015,Laura Schulz,laura.schulz15@example.com,L015,06 Mar 2026,2027-03-06,64,1945,Occupied
+B004,Hanseatic Business Centre,Hamburg,20095,U016,206,T016,Felix Müller,felix.mueller16@example.com,L016,2025-04-08,08.04.2026,71,2018,Occupied
+B005,Elbe View House,Hamburg,20457,U017,207,T017,Nina Fischer,nina.fischer17@example.com,L017,10.05.2026,10/05/2027,78,2091,Occupied
+B006,Isar Park,Munich,80331,U018,208,T018,David Wagner,david.wagner18@example.com,L018,12/06/2025,12 Jun 2026,85,"1,450 EUR",Occupied
+B007,Bavaria Tech Campus,Munich,80807,U019,209,T019,Sarah Schulz,sarah.schulz19@example.com,L019,14 Jul 2026,2027-07-14,92,987,Occupied
+B008,Main Tower Annex,Frankfurt,60311,U020,210,T020,Max Müller,max.mueller20@example.com,L020,2025-08-16,16.08.2026,99,1060,Occupied
+B009,Westend Court,Frankfurt,60325,U021,301,T021,Anna Fischer,anna.fischer21@example.com,L021,18.09.2026,18/09/2027,,1133,Occupied
+B010,Kreuzberg Works,Berlin,10997,U022,302,T022,Lukas Wagner,lukas.wagner22@example.com,L022,20/10/2025,20 Oct 2026,113,1206,Occupied
+B011,Alster Gate,Hamburg,20148,U023,303,T023,Mia Schulz,mia.schulz23@example.com,L023,22 Nov 2026,2025-01-01,120,1279,Occupied
+B012,Leopold Quarter,Munich,80802,U024,304,T024,Noah Müller,noah.mueller24@example.com,L024,2025-12-24,24.12.2026,44,1352,Occupied
+B001,Alexanderhof,Berlin,10115,U025,305,T025,Lea Fischer,lea.fischer25@example.com,L025,01.01.2026,01/01/2027,51,1425,Occupied
+B002,Riverside Plaza,Berlin,10963,U026,306,T026,  leon müller  ,paul.wagner26@example.com,L026,03/02/2025,03 Feb 2026,58,1498,Occupied
+B003,Spree Offices,Berlin,10243,U027,307,T027,Sophie Schulz,sophie.schulz27@example.com,L027,05 Mar 2026,2027-03-05,65,1571,Occupied
+B004,Hanseatic Business Centre,HAMBURG,20095,U028,308,T028,Leon Müller,leon.mueller28@example.com,L028,2025-04-07,07.04.2026,72,1644,Occupied
+B005,Elbe View House,Hamburg,20457,U029,309,T029,Emma Fischer,emma.fischer29@example.com,L028,09.05.2026,09/05/2027,79,1717,Occupied
+B006,Isar Park,Munich,80331,U030,310,T030,Ben Wagner,ben.wagner30@example.com,L030,11/06/2025,11 Jun 2026,86,1790,Occupied
+B007,Bavaria Tech Campus,Munich,80807,U031,401,T031,Marie Schulz,marie.schulz31@example.com,L031,31/02/2026,2027-07-13,93,1863,Occupied
+B008,Main Tower Annex,Frankfurt,60311,U032,402,T032,Elias Müller,elias.mueller32@example.com,L032,2025-08-15,15.08.2026,100,1936,Occupied
+B009,Westend Court,Frankfurt,60325,U033,403,T033,Clara Fischer,clara.fischer33@example.com,L033,17.09.2026,17/09/2027,107,2009,Occupied
+B010,Kreuzberg Works,Berlin,10997,U034,404,T034,Jonas Wagner,jonas.wagner34@example.com,,19/10/2025,19 Oct 2026,114,2082,Occupied
+B011,Alster Gate,Hamburg,20148,U035,405,T035,Laura Schulz,laura.schulz35@example.com,L035,21 Nov 2026,2027-11-21,121,905,Occupied
+B012,Leopold Quarter,Munich,80802,U036,406,T036,Felix Müller,felix.mueller36@example.com,L036,2025-12-23,23.12.2026,45,978,Occupied
+B001,Alexanderhof,Berlin,10115,U037,407,T037,Nina Fischer,sophie@@mail.com,L037,25.01.2026,25/01/2027,52,1051,Occupied
+B002,Riverside Plaza,Berlin,10963,U038,408,T038,David Wagner,david.wagner38@example.com,L038,02/02/2025,02 Feb 2026,59,1124,Occupied
+B003,Spree Offices,Berlin,10243,U039,409,T039,Sarah Schulz,sarah.schulz39@example.com,L039,04 Mar 2026,2027-03-04,66,-900,Occupied
+B004,Hanseatic Business Centre,Hamburg,20095,U040,410,T040,Max Müller,max.mueller40@example.com,L040,2025-04-06,06.04.2026,73,1270,Occupied
+B005,Elbe View House,Hamburg,20457,U040,501,T041,Anna Fischer,anna.fischer41@example.com,L041,08.05.2026,08/05/2027,80,1343,Occupied
+B006,Isar Park,Munich,80331,U042,502,T042,Lukas Wagner,lukas.wagner42@example.com,L042,10/06/2025,10 Jun 2026,0,1416,Occupied
+B007,Bavaria Tech Campus,Munich,80807,U043,503,T043,Mia Schulz,mia.schulz43@example.com,L043,12 Jul 2026,2027-07-12,94,1489,Occupied
+B008,Main Tower Annex,Frankfurt,60311,U044,504,T044,Noah Müller,noah.mueller44@example.com,L044,2025-08-14,,101,1562,Occupied
+B009,Westend Court,Frankfurt,1011,U045,505,T045,Lea Fischer,lea.fischer45@example.com,L045,16.09.2026,16/09/2027,108,1635,Occupied
+B010,Kreuzberg Works,Berlin,10997,U046,506,T046,Paul Wagner,paul.wagner46@example.com,L046,18/10/2025,18 Oct 2026,eighty,1708,Occupied
+B011,Alster Gate,Hamburg,20148,U047,507,T047,Sophie Schulz,sophie.schulz47@example.com,L047,20 Nov 2026,2027-11-20,122,1781,Occupied
+B012,Leopold Quarter,Munich,80802,U048,508,,Leon Müller,leon.mueller48@example.com,L048,2025-12-22,22.12.2026,46,1854,Occupied
+B001,Alexanderhof,Berlin,10115,U049,509,T049,Emma Fischer,emma.fischer49@example.com,L049,24.01.2026,24/01/2027,53,1927,Occupied
+B002,Riverside Plaza,Berlin,10963,U050,510,T050,Ben Wagner,not-an-email,L050,01/02/2025,01 Feb 2026,60,2000,Occupied
+B003,Spree Offices,Berlin,10243,U051,A- 12,T051,Marie Schulz,marie.schulz51@example.com,L051,03 Mar 2026,2027-03-03,67,2073,Occupied
+B004,Hanseatic Business Centre,Hamburg,20095,U052,602,T052,Elias Müller,elias.mueller52@example.com,L052,2025-04-05,05.04.2026,74,896,Occupied
+B005,Elbe View House,Hamburg,20457,U053,603,T053,Clara Fischer,clara.fischer53@example.com,L053,07.05.2026,07/05/2027,81,,Occupied
+B006,Isar Park,Munich,80331,U054,604,T054,Jonas Wagner,jonas.wagner54@example.com,L054,09/06/2025,09 Jun 2026,88,1042,Occupied
+B007,Bavaria Tech Campus,Munich,80807,U055,605,T055,Laura Schulz,laura.schulz55@example.com,L055,11 Jul 2026,2027-07-11,95,1115,Occupied
+B005,Elbe View House,Hamburg,20457,U005,105,T005,Lea Fischer,lea.fischer5@example.com,L005,11.05.2026,11/05/2027,77,1215,Occupied
+B012,Leopold Quarter,Munich,80802,U012,202,T012,Elias Müller,elias.mueller12@example.com,L012,2025-12-25,25.12.2026,43,1726,Occupied
+B001,Alexanderhof,Berlin,10115,U025,305,T025,Lea Fischer,lea.fischer25@example.com,L025,01.01.2026,01/01/2027,51,1425,Occupied
+B009,Westend Court,Frankfurt,60325,U033,403,T033,Clara Fischer,clara.fischer33@example.com,L033,17.09.2026,17/09/2027,107,2009,Occupied
+B008,Main Tower Annex,Frankfurt,60311,U044,504,T044,Noah Müller,noah.mueller44@example.com,L044,2025-08-14,,101,1562,Occupied

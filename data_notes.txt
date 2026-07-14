@@ -1,0 +1,27 @@
+Missing values:
+Missing building id
+tenant_id 
+lease_id 
+area_sqm
+
+Inconsistency:
+building_name (unnecessary capitalisation)
+city (irregular capitalisation)
+
+Numeric issues:
+unit_number
+area_sqm
+Monethly_rent_eur
+
+Invalid_emails:
+tenant_email (Nina Fischer, Ben Wagner)
+
+Date_issues:
+lease_start
+lease_end
+
+Duplicate_id:
+building_id
+
+
+

@@ -1,3 +1,5 @@
+import pandas as pd
+
 # finds the number of missing cells in each affected column and the total.
 def missing(df):
   missing_vals = df.isna()

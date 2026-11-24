@@ -1,121 +1,96 @@
 # Data Management System (DMS)
 
-DMS is a simple Python project for checking data quality before data is imported into another system.
+DMS is a Python command-line tool for checking property data before a migration. It reads a CSV, checks its required columns, and prints a JSON report that summarises the issues found.
 
-It reads a property dataset from a CSV file and finds common problems that could cause errors during data migration, such as missing information and duplicate records.
+## What DMS checks
 
-## What the Project Checks
+| Check | What the report counts |
+| --- | --- |
+| Missing values | Missing cells across the CSV, with a breakdown by affected column |
+| Exact duplicates | Extra copies of rows that match across all columns |
+| Repeated unit IDs | All rows sharing a nonblank `unit_id`, with a count for each repeated ID |
+| Negative rent | Rows where monthly rent is below zero |
+| Invalid floor area | Rows where floor area is zero or less |
+| Reversed lease dates | Rows where the lease end date is earlier than the start date |
 
-The current version checks for:
+A CSV must contain `unit_id`, `monthly_rent_eur`, `area_sqm`, `lease_start`, and `lease_end`. Rent values can use comma thousands separators and an `EUR` suffix, such as `1,450 EUR`. Lease dates can use ISO dates or day-first formats such as `04/02/2026` and `04 Feb 2026`. The range and date-order checks use values that parse successfully.
 
-- Missing values in any column
-- Completely duplicated rows
-- Repeated IDs in a selected column
-- The number of detected problems
+## Run locally
 
-For the included property dataset, the project is also intended to help identify:
-
-- Inconsistent capitalisation in building names and cities
-- Incorrect numeric values
-- Invalid tenant email addresses
-- Incorrect lease dates
-- Duplicate building or unit IDs
-
-## Why This Is Useful
-
-Before data is transferred from spreadsheets or old systems into a new platform, it should be checked carefully.
-
-This project helps make that process easier by finding data-quality problems early. The results can then be reviewed and corrected before the final import.
-
-## Technologies Used
-
-- Python
-- Pandas
-- CSV data
-
-## Project Structure
-
-```text
-DMS/
-├── main.py
-├── errors.py
-├── data_notes.txt
-└── raw_data/
-    └── property_data_raw.csv
-```
-
-- `main.py` loads the CSV file and runs the checks.
-- `errors.py` contains reusable functions for detecting data problems.
-- `data_notes.txt` records known issues found in the dataset.
-- `raw_data/property_data_raw.csv` contains the original property data.
-
-## How to Run the Project
-
-### 1. Clone the repository
+Use Python 3.12 to match the Docker environment.
 
 ```bash
 git clone https://github.com/Sargunjot-Kaur/DMS.git
 cd DMS
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py raw_data/property_data_raw.csv
 ```
 
-### 2. Install Pandas
+Pass a different CSV path to check another dataset. To save the sample report to a file, run:
 
 ```bash
-pip install pandas
+python main.py raw_data/property_data_raw.csv > quality_report.json
 ```
 
-### 3. Add the CSV file
+## Run with Docker
 
-Place the source dataset at:
-
-```text
-raw_data/property_data_raw.csv
-```
-
-### 4. Run the program
+Start Docker, then run the following commands from the project directory. The image includes the sample CSV and uses it by default.
 
 ```bash
-python main.py
+docker build -t dms-quality .
+docker run --rm dms-quality
 ```
 
-## Output
+## Run the tests
 
-When the program runs, it displays:
+The six pytest tests cover missing cells, exact duplicates, repeated IDs, negative rent, nonpositive floor area, and lease date order.
 
-- The first five rows of the dataset
-- The total number of rows and columns
-- All column names
-- Missing values by column
-- Duplicate rows
-- Repeated values in the `unit_id` column
+```bash
+python -m pytest -q test_errors.py
+```
 
-This output shows which records need attention before the data is moved into the target system.
+To run the same tests inside the Linux container, use:
 
-## Main Functions
+```bash
+docker run --rm --entrypoint python dms-quality -m pytest -q test_errors.py
+```
 
-### `missing(df)`
+## Sample report
 
-Finds columns containing empty values and returns the number of missing values.
+The included CSV produces the following results:
 
-### `duplicate(df)`
+| JSON field | Sample result |
+| --- | --- |
+| `rows_checked` | 60 |
+| `missing_cells` | 7 |
+| `missing_by_column` | 2 in `lease_end` and 1 each in five other columns |
+| `extra_duplicate_rows` | 5 |
+| `rows_with_repeated_unit_ids` | 12 |
+| `repeated_unit_ids` | 6 IDs, each appearing twice |
+| `negative_rent_rows` | 1 |
+| `nonpositive_area_rows` | 1 |
+| `reversed_lease_date_rows` | 1 |
 
-Finds rows that are exact duplicates and returns the duplicate count.
+## Project files
 
-### `duplicated_IDs(df, column_name)`
+| File | Purpose |
+| --- | --- |
+| `main.py` | Reads the CSV path, validates the input, and prints the JSON report |
+| `errors.py` | Contains the six data-quality checks |
+| `test_errors.py` | Tests the behaviour of each check with a small example dataset |
+| `requirements.txt` | Lists the Python dependencies for the pipeline and tests |
+| `Dockerfile` | Defines the Linux environment for running the pipeline |
+| `raw_data/property_data_raw.csv` | Contains the sample property data |
+| `data_notes.txt` | Records issues observed in the source dataset |
 
-Finds every row that uses a repeated ID in the selected column.
+## Future improvements
 
-## Future Improvements
-
-- Automatically correct inconsistent capitalisation
-- Validate email-address formats
-- Convert numeric columns to the correct data type
-- Validate lease start and end dates
-- Remove or flag invalid records
-- Export a clean CSV file ready for import
-- Generate a data-quality summary report
+- Validate tenant email addresses and flag values that cannot be parsed.
+- Standardise capitalisation in building and city names.
+- Export flagged rows for review before migration.
 
 ## Author
 
 Sargunjot Kaur
-

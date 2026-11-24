@@ -43,18 +43,55 @@ docker build -t dms-quality .
 docker run --rm dms-quality
 ```
 
-## Run the tests
-
-The six pytest tests cover missing cells, exact duplicates, repeated IDs, negative rent, nonpositive floor area, and lease date order.
+To verify the container is running Linux, use:
 
 ```bash
-python -m pytest -q test_errors.py
+docker run --rm --entrypoint uname dms-quality -s
+```
+
+The Docker verification workflow builds the image from a fresh pull-request checkout, checks the sample report, and runs the tests in the container.
+
+## Run on Linux over SSH
+
+Connect to a Linux machine where you have an account:
+
+```bash
+ssh user@linux-host
+uname -s
+```
+
+On the remote host, clone the repository and follow the local or Docker instructions above. Run the checks there and save the JSON report on that host.
+
+## Run the tests
+
+Six tests cover the data checks. Two more cover the JSON output and the optional S3 upload.
+
+```bash
+python -m pytest -q
 ```
 
 To run the same tests inside the Linux container, use:
 
 ```bash
-docker run --rm --entrypoint python dms-quality -m pytest -q test_errors.py
+docker run --rm --entrypoint python dms-quality -m pytest -q
+```
+
+## Save a report to Amazon S3
+
+Use an existing private S3 bucket and a configured AWS profile with permission to write the object. Replace `dms` and `your-private-bucket` with your profile and bucket.
+
+```bash
+AWS_PROFILE=dms python main.py raw_data/property_data_raw.csv \
+  --s3-output s3://your-private-bucket/reports/quality-report.json \
+  > quality_report.json
+```
+
+The command prints the report as JSON and uploads the same report with content type `application/json`. If the upload fails, the command reports the error on standard error and exits with status 1. To download the object for verification, use the AWS CLI with permission to read it:
+
+```bash
+aws --profile dms s3 cp \
+  s3://your-private-bucket/reports/quality-report.json downloaded_report.json
+python -m json.tool downloaded_report.json
 ```
 
 ## Sample report
@@ -80,10 +117,10 @@ The included CSV produces the following results:
 | `main.py` | Reads the CSV path, validates the input, and prints the JSON report |
 | `errors.py` | Contains the six data-quality checks |
 | `test_errors.py` | Tests the behaviour of each check with a small example dataset |
+| `test_main.py` | Tests JSON output and S3 upload behaviour |
 | `requirements.txt` | Lists the Python dependencies for the pipeline and tests |
 | `Dockerfile` | Defines the Linux environment for running the pipeline |
 | `raw_data/property_data_raw.csv` | Contains the sample property data |
-| `data_notes.txt` | Records issues observed in the source dataset |
 
 ## Future improvements
 

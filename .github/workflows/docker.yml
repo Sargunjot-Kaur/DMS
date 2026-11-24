@@ -1,0 +1,40 @@
+name: Docker verification
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Build the Docker image
+        run: docker build --tag dms-quality .
+
+      - name: Run the sample CSV
+        run: |
+          docker run --rm dms-quality > quality_report.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("quality_report.json").read_text())
+          assert report["rows_checked"] == 60
+          assert report["missing_cells"] == 7
+          assert report["extra_duplicate_rows"] == 5
+          assert report["rows_with_repeated_unit_ids"] == 12
+          assert report["negative_rent_rows"] == 1
+          assert report["nonpositive_area_rows"] == 1
+          assert report["reversed_lease_date_rows"] == 1
+          PY
+
+      - name: Verify Linux and run the tests
+        run: |
+          test "$(docker run --rm --entrypoint uname dms-quality -s)" = Linux
+          docker run --rm --entrypoint python dms-quality -m pytest -q

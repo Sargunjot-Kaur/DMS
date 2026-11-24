@@ -1,7 +1,9 @@
 import argparse
 import json
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
+
 from errors import (
     duplicate,
     duplicated_IDs,
@@ -24,9 +26,21 @@ def load_csv(path):
 
     return data
 
+
+def s3_destination(value):
+    bucket, separator, key = value.removeprefix("s3://").partition("/")
+    if not value.startswith("s3://") or not bucket or not separator or not key:
+        raise argparse.ArgumentTypeError("Use an S3 destination like s3://bucket/path/report.json.")
+    return bucket, key
+
+
 def main():
     parser = argparse.ArgumentParser(description="Check a property CSV.")
     parser.add_argument("input_csv", type=Path, help="Path to the input CSV")
+    parser.add_argument(
+        "--s3-output", type=s3_destination,
+        help="Upload the JSON report to s3://bucket/key",
+    )
     args = parser.parse_args()
 
     try:
@@ -46,7 +60,6 @@ def main():
     _, nonpositive_area_count = nonpositive_area(data)
     _, reversed_lease_count = reversed_lease_dates(data)
 
-    # Creates a valid json file will the report informartion
     report = {
         "rows_checked": len(data),
         "missing_cells": int(missing_count),
@@ -63,7 +76,26 @@ def main():
         "reversed_lease_date_rows": int(reversed_lease_count),
     }
 
-    print(json.dumps(report, indent=2))
+    report_json = json.dumps(report, indent=2)
+    print(report_json)
+
+    if args.s3_output is not None:
+        try:
+            import boto3
+            from botocore.exceptions import BotoCoreError, ClientError
+        except ImportError:
+            parser.exit(1, "Install requirements.txt to enable S3 uploads.\n")
+
+        bucket, key = args.s3_output
+        try:
+            boto3.client("s3").put_object(
+                Bucket=bucket,
+                Key=key,
+                Body=report_json.encode("utf-8"),
+                ContentType="application/json",
+            )
+        except (BotoCoreError, ClientError) as error:
+            parser.exit(1, f"Could not upload the JSON report to S3: {error}\n")
 
 
 if __name__ == "__main__":

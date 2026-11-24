@@ -42,6 +42,10 @@ def main():
     repeated_rows, repeated_id_count = duplicated_IDs(rows_with_ids, "unit_id")
     id_counts = repeated_rows["unit_id"].value_counts()
 
+    _, negative_rent_count = negative_rent(data)
+    _, nonpositive_area_count = nonpositive_area(data)
+    _, reversed_lease_count = reversed_lease_dates(data)
+
     # Creates a valid json file will the report informartion
     report = {
         "rows_checked": len(data),
@@ -54,6 +58,9 @@ def main():
         "repeated_unit_ids": {
             str(unit_id): int(count) for unit_id, count in id_counts.items()
         },
+        "negative_rent_rows": int(negative_rent_count),
+        "nonpositive_area_rows": int(nonpositive_area_count),
+        "reversed_lease_date_rows": int(reversed_lease_count),
     }
 
     print(json.dumps(report, indent=2))

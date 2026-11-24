@@ -14,10 +14,15 @@ from errors import (
 
 def load_csv(path):
     data = pd.read_csv(path, dtype={"unit_id": "string"})
-    if "unit_id" not in data.columns:
-        raise ValueError("Required column is missing: unit_id")
-    return data
+    required_columns = [
+        "unit_id", "monthly_rent_eur", "area_sqm", "lease_start", "lease_end"
+    ]
 
+    for column in required_columns:
+        if column not in data.columns:
+            raise ValueError(f"Required column is missing: {column}")
+
+    return data
 
 def main():
     parser = argparse.ArgumentParser(description="Check a property CSV.")

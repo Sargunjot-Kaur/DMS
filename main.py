@@ -1,9 +1,7 @@
 import argparse
 import json
-from pathlib import Path
-
 import pandas as pd
-
+from pathlib import Path
 from errors import duplicate, duplicated_IDs, missing
 
 

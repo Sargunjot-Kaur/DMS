@@ -5,14 +5,14 @@ import pandas as pd
 
 from errors import duplicate, duplicated_IDs, missing
 
-
+# checks if the csv file has a unit_id; else returns - missing column
 def load_csv(path):
     data = pd.read_csv(path, dtype={"unit_id": "string"})
     if "unit_id" not in data.columns:
         raise ValueError("Required column is missing: unit_id")
     return data
 
-
+# take input csv from the terminal --> checks unit_id --> prints errors in file
 def main():
     parser = argparse.ArgumentParser(description="Check a property CSV.")
     parser.add_argument("input_csv", type=Path, help="Path to the input CSV")

@@ -2,7 +2,14 @@ import argparse
 import json
 import pandas as pd
 from pathlib import Path
-from errors import duplicate, duplicated_IDs, missing
+from errors import (
+    duplicate,
+    duplicated_IDs,
+    missing,
+    negative_rent,
+    nonpositive_area,
+    reversed_lease_dates,
+)
 
 
 def load_csv(path):

@@ -1,6 +1,5 @@
 import pandas as pd
-
-from errors import missing, duplicate, duplicated_IDs
+from errors import missing, duplicate, duplicated_IDs, negative_rent, nonpositive_area, reversed_lease_dates
 
 # Test to count that the missing valueys are counted per column in total
 def test_missing():

@@ -40,3 +40,8 @@ def reversed_lease_dates(df):
   start_dates = pd.to_datetime(
     df["lease_start"], format="mixed", dayfirst=True, errors="coerce"
   )
+  end_dates = pd.to_datetime(
+    df["lease_end"], format="mixed", dayfirst=True, errors="coerce"
+  )
+  date_mask = end_dates < start_dates
+  return df[date_mask], date_mask.sum()
